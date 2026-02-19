@@ -1,0 +1,22 @@
+require("nvchad.configs.lspconfig").defaults()
+
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--enable-config",
+    "--compile-commands-dir=build",
+  },
+  init_options = {
+    fallbackFlags = {
+      "-std=gnu++20",
+      "-Ibuild/src",
+      "-Iinclude",
+    },
+  },
+})
+
+local servers = { "html", "cssls", "clangd" }
+vim.lsp.enable(servers)
+
+-- read :h vim.lsp.config for changing options of lsp servers
